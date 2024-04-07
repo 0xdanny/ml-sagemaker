@@ -76,7 +76,7 @@ export const uploadToDynamoDB = async (mergedRates: {
 
 export const isDynamoDBTableEmpty = async (): Promise<boolean> => {
   try {
-    const command = new ScanCommand({ TableName: tableName });
+    const command = new ScanCommand({ TableName: tableName, Limit: 1 });
     const { Items } = await dynamoDBClient.send(command);
     return !Items || Items.length === 0;
   } catch (error) {
